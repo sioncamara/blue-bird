@@ -1,0 +1,15 @@
+name: Auto approve admin
+
+on: pull_request_target
+
+jobs:
+  auto-approve:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    if: github.actor == github.repository_owner
+    steps:
+      - uses: hmarr/auto-approve-action@v4
+        with:
+          github-token: ${{ secrets.REPO_OWNER_PAT }}
+          review-message: "Auto approved admin PR"
